@@ -10,6 +10,7 @@ import "@primitivefi/hardhat-dodoc";
 import "hardhat-abi-exporter";
 import "@atixlabs/hardhat-time-n-mine";
 import "hardhat-spdx-license-identifier";
+import "@openzeppelin/hardhat-upgrades";
 
 dotenv.config();
 
