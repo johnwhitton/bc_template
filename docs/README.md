@@ -7,6 +7,7 @@ The project comes with a sample contract, a test for that contract, a sample scr
 Try running some of the following tasks:
 
 ```shell
+npx hardhat check
 npx hardhat compile
 npx hardhat accounts
 npx hardhat clean
@@ -66,7 +67,8 @@ Do you want to install this sample project's dependencies with npm (
 * hardhat-gas-reporter 
 * prettier 
 * prettier-plugin-solidity 
-* solhint solidity-coverage 
+* solhint 
+* solidity-coverage 
 * @typechain/ethers-v5 
 * @typechain/hardhat 
 * @typescript-eslint/eslint-plugin 
@@ -86,5 +88,45 @@ The following [plugins](https://hardhat.org/plugins/) have also been added
 * [@primitivefi/hardhat-dodoc](https://www.npmjs.com/package/@primitivefi/hardhat-dodoc): Solidity Document Generation
 
 # Additional Tools
-* [slither](https://github.com/crytic/slither)
-* [certora](https://www.certora.com/)
+* [slither](https://github.com/crytic/slither): vulnerability analysis and generation of contract relationship diagrams
+* [certora](https://www.certora.com/) [docs](https://certora.atlassian.net/wiki/spaces/CPD/pages/7274497/Installation+of+Certora+Prover): formal verification
+
+# Slither
+
+Slither documentation can be found [here](https://github.com/crytic/slither)
+#### List all solidity warnings and vulnerabilities
+```
+slither .
+```
+
+#### Producting slither inheritance graph
+
+```
+slither . --print inheritance-graph
+mv *.dot ./slither/.
+cd slither
+dot inheritance-graph.dot -Tpng -o inheritance-graph.png
+rm *.dot
+```
+
+For a single file see issue [here](https://ethereum.stackexchange.com/questions/91593/slither-not-working-with-truffle-imports)
+
+Also use [solc-select](https://github.com/crytic/solc-select/)
+
+Note: instead ofusing solc-remaps you can put the full path in the contract, this is easier if you have multiple imports like openzepplin and erc721a. After generating the image then revert back to the original import statement.
+
+```
+slither contracts/GAMAv2.sol --print inheritance-graph --solc-remaps @openzeppelin/=$(pwd)/node_modules/@openzeppelin/
+mv ./contracts/GAMAv2.sol.inheritance-graph.dot ./slither/.
+dot ./slither/GAMAv2.sol.inheritance-graph.dot -Tpng -o ./slither/GAMAv2.sol.inheritance-graph.png
+```
+
+#### Producting a contracts call graph
+
+```
+slither . --print call-graph
+mv *.dot ./slither/.
+cd slither
+dot GAMAv2.call-graph.dot -Tpng -o GAMAv2.call-graph.png
+rm *.dot
+```
