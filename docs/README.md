@@ -86,6 +86,7 @@ The following [plugins](https://hardhat.org/plugins/) have also been added
 * [@atixlabs/hardhat-time-n-mine](https://www.npmjs.com/package/@atixlabs/hardhat-time-n-mine)
 * [hardhat-spdx-license-identifier](https://www.npmjs.com/package/hardhat-spdx-license-identifier)
 * [@primitivefi/hardhat-dodoc](https://www.npmjs.com/package/@primitivefi/hardhat-dodoc): Solidity Document Generation
+* [@openzeppelin/hardhat-upgrades](https://www.npmjs.com/package/@openzeppelin/hardhat-upgrades)
 
 # Additional Tools
 * [slither](https://github.com/crytic/slither): vulnerability analysis and generation of contract relationship diagrams
