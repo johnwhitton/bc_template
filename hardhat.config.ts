@@ -5,6 +5,7 @@ import "@nomiclabs/hardhat-etherscan";
 import "@nomiclabs/hardhat-waffle";
 import "@typechain/hardhat";
 import "hardhat-gas-reporter";
+import "hardhat-deploy";
 import "solidity-coverage";
 import "@primitivefi/hardhat-dodoc";
 import "hardhat-abi-exporter";
@@ -13,6 +14,10 @@ import "hardhat-spdx-license-identifier";
 import "@openzeppelin/hardhat-upgrades";
 
 dotenv.config();
+
+const HARMONY_PRIVATE_KEY = process.env.PRIVATE_KEY;
+// const PROJECT_ID = process.env.INFURA_PROJECT_ID;
+// const ROPSTEN_URL = `https://ropsten.infura.io/v3/${PROJECT_ID}`
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -28,8 +33,32 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 // Go to https://hardhat.org/config/ to learn more
 
 const config: HardhatUserConfig = {
-  solidity: "0.8.4",
+  solidity: {
+    version: "0.8.9",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 50000,
+      },
+    },
+  },
+  namedAccounts: {
+    deployer: 0,
+    greeter: 1,
+  },
   networks: {
+    localnet: {
+      url: `http://localhost:9500`,
+      accounts: [`0x${HARMONY_PRIVATE_KEY}`]
+    },
+    testnet: {
+      url: `https://api.s0.b.hmny.io`,
+      accounts: [`0x${HARMONY_PRIVATE_KEY}`]
+    },
+    mainnet: {
+      url: `https://api.harmony.one`,
+      accounts: [`0x${HARMONY_PRIVATE_KEY}`]
+    },
     ropsten: {
       url: process.env.ROPSTEN_URL || "",
       accounts:

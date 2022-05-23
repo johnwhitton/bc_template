@@ -1,9 +1,28 @@
 {
-  "name": "hardhat-project",
+  "name": "blockchain-template",
+  "version": "1.0.0",
+  "description": "Template using hardhat for blockchain projects",
   "license": "UNLICENSED",
+  "files": [
+    "artifacts",
+    "contracts",
+    "deploy",
+    "deployments",
+    "exports",
+    "types"
+  ],
+  "scripts": {
+    "check": "npx hardhat check",
+    "compile": "npx hardhat compile",
+    "coverage": "npx hardhat coverage",
+    "deploy": "npx hardhat run scripts/deploy.ts",
+    "flat": "npx hardhat flatten ./contracts/Greeter.sol >> ./flat/FlatGreeter.sol",
+    "gas": "REPORT_GAS=true npx hardhat test",
+    "test": "npx hardhat test"
+  },
   "devDependencies": {
     "@atixlabs/hardhat-time-n-mine": "^0.0.5",
-    "@nomiclabs/hardhat-ethers": "^2.0.6",
+    "@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers",
     "@nomiclabs/hardhat-etherscan": "^3.0.3",
     "@nomiclabs/hardhat-waffle": "^2.0.3",
     "@openzeppelin/hardhat-upgrades": "^1.17.0",
@@ -28,6 +47,7 @@
     "ethers": "^5.6.7",
     "hardhat": "^2.9.6",
     "hardhat-abi-exporter": "^2.9.0",
+    "hardhat-deploy": "^0.11.10",
     "hardhat-gas-reporter": "^1.0.8",
     "hardhat-spdx-license-identifier": "^2.0.3",
     "prettier": "^2.6.2",
